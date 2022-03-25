@@ -35,6 +35,20 @@ class report extends Controller
 
     public function process(Request $request)
     {
+        $validatedData = $request->validate(
+            [
+                'plan' => 'required',
+                'start' => 'required',
+                'end' => 'required',
+                'vtype' => 'required',
+            ],
+            [
+                'plan.required' => 'กรุณาระบุสิทธิ์การรักษา',
+                'start.required' => 'กรุณาระบุวันที่เริ่มต้น',
+                'end.required' => 'กรุณาระบุวันที่สิ้นสุด',
+                'vtype.required' => 'กรุณาระบุประเภทผู้ป่วย',
+            ],
+        );
         if($request->plan){
             $arr_select = array();
             foreach($request->plan as $plan){

@@ -5,30 +5,37 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">รายงานค่ารักษาพยาบาล</h5>
+                    <h5 class="card-title">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                        รายงานค่ารักษาพยาบาล
+                    </h5>
                     <div class="row card-category">
-                        <div class="col-md-3 text-left">
+                        <div class="col-md-3 text-center">
                             <span>
                                 <i class="fa-regular fa-calendar-check"></i>
                                 {{ DateThai($_REQUEST['start']) ." ถึง ".DateThai($_REQUEST['end']) }}
                             </span>
                         </div>
-                        <div class="col-md-3 text-center">
+                        <div class="col-md-3">
                             <i class="fa-regular fa-square-check"></i>
-                            <span>สิทธิ์ที่เลือก : </span>
-                            @foreach ($splan as $plan)
-                            <span class="badge badge-secondary">{{ $plan->contract_plans_description }}</span>
-                            @endforeach
+                            <span>สิทธิ์ที่เลือก</span>
+                            <ul>
+                                @foreach ($splan as $plan)
+                                    <li>{{ $plan->contract_plans_description }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <i class="fa-regular fa-rectangle-xmark"></i>
+                            <span>ICD10 ที่คัดออก</span>
+                            @php $icd = explode(",",$icds); @endphp
+                            <ul>
+                                @foreach ($icd as $res)
+                                    <li>{{ $res }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                         <div class="col-md-3 text-center">
-                            <i class="fa-regular fa-rectangle-xmark"></i>
-                            <span>ICD10 ที่คัดออก : </span>
-                            @php $icd = explode(",",$icds); @endphp
-                            @foreach ($icd as $res)
-                            <span class="badge badge-danger">{{ $res }}</span>
-                            @endforeach
-                        </div>
-                        <div class="col-md-3 text-right">
                             <i class="fa-regular fa-hospital"></i>
                             <span>ประเภทผู้ป่วย : </span>
                             @if ($_REQUEST['vtype'] == 0)
@@ -55,7 +62,9 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php $cost = 0; @endphp
                             @foreach ($data as $res)
+                            @php $cost += $res->visit_cost @endphp
                             <tr class="text-center">
                                 <td>{{ $res->visit_date }}</td>
                                 <td>{{ $res->visit_pid }}</td>
@@ -69,6 +78,23 @@
                             </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr class="font-weight-bold">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-center">
+                                    รวมค่ารักษาพยาบาล
+                                </td>
+                                <td class="text-right">
+                                    {{ number_format($cost,2)." ฿" }}
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
                 <div class="card-footer">

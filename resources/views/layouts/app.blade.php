@@ -180,6 +180,17 @@
     })
 
 </script>
+@if($errors->any())
+    <script>
+        Swal.fire({
+            title: 'พบข้อผิดพลาด',
+            icon: 'warning',
+            html: '<div class="text-left"><ul>@foreach ($errors->all() as $error)' +
+                '<li>{{ $error }}</li>' +
+                '@endforeach</ul></div>',
+        })
+    </script>
+@endif
 @section('script')
 @show
 
