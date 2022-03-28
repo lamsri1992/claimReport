@@ -5,7 +5,7 @@
         <div class="card-body">
             <div class="alert alert-primary" role="alert">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <span class="font-weight-bold">
                             <i class="fa-regular fa-calendar-check"></i>
                             วันที่
@@ -16,7 +16,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <span class="font-weight-bold">
                             <i class="fa-regular fa-square-check"></i>
                             สิทธิ์ที่เลือก
@@ -27,7 +27,7 @@
                             @endforeach
                         </ul>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <i class="fa-regular fa-rectangle-xmark"></i>
                         <span class="font-weight-bold">ICD10 ที่คัดออก</span>
                         @php $icd = explode(",",$icds); @endphp
@@ -37,7 +37,17 @@
                             @endforeach
                         </ul>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
+                        <i class="fa-regular fa-rectangle-xmark"></i>
+                        <span class="font-weight-bold">ICD10 ที่ระบุ</span>
+                        @php $gicd = explode(",",$gicds); @endphp
+                        <ul>
+                            @foreach ($gicd as $res)
+                                <li>{{ $res }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="col-md-2">
                         <i class="fa-regular fa-hospital"></i>
                         <span class="font-weight-bold">ประเภทผู้ป่วย</span>
                         <ul>

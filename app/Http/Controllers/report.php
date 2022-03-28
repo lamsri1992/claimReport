@@ -78,6 +78,25 @@ class report extends Controller
             $icd = "";
         }
 
+        if(isset($request->gicd10)){
+            $arr_select = array();
+            foreach($request->gicd10 as $gicd10){
+                $arr_select[] = $gicd10;
+            }
+            $gicd10s = "'".implode("','",$arr_select)."'";
+            $gicds = implode(",",$arr_select);
+        }else{
+            $gicd10s = "";
+            $gicds = "";
+        }
+
+        if($gicd10s != "")
+        {
+            $gicd = "AND t_diag_icd10.diag_icd10_number IN (".$gicd10s.")";
+        }else{
+            $gicd = "";
+        }
+
         $start = substr($request->start,4);
         $sYear = date("Y",strtotime($request->start))+543;
         $sNew = $sYear.$start;
@@ -121,6 +140,7 @@ class report extends Controller
                 AND (SUBSTRING(t_visit.visit_begin_visit_time,1,10) BETWEEN ('$sNew') AND ('$eNew'))
                 AND b_contract_plans.b_contract_plans_id IN ($plans)
                 $icd
+                $gicd
             GROUP BY 
                 t_visit.t_visit_id,f_patient_prefix.patient_prefix_description,t_patient.patient_firstname
                 ,t_patient.patient_lastname,t_patient.patient_pid,t_patient.patient_birthday,b_employee.employee_number
@@ -138,6 +158,6 @@ class report extends Controller
                 FROM b_contract_plans
                 WHERE b_contract_plans_id IN ($plans)");
         
-        return view('report.result',['data'=>$data,'splan'=>$splan,'icds'=>$icds]);
+        return view('report.result',['data'=>$data,'splan'=>$splan,'icds'=>$icds,'gicds'=>$gicds]);
     }
 }

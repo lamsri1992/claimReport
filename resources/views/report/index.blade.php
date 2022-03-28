@@ -15,7 +15,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="">
-                                    <i class="fa-solid fa-file-medical"></i>
+                                    <i class="fa-solid fa-file-medical text-secondary"></i>
                                     เลือกสิทธิ์การรักษา 
                                     <small class="text-danger">** สามารถเลือกได้มากกว่า 1 สิทธิ์ **</small>
                                 </label>
@@ -31,7 +31,7 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="">
-                                    <i class="fa-solid fa-book"></i>
+                                    <i class="fa-solid fa-times-square text-danger"></i>
                                     เลือกรหัสโรคที่ไม่ต้องการ : ICD10
                                     <small class="text-danger">** หากต้องการกรองจากรหัสโรคทั้งหมดให้เว้นว่างไว้ **</small>
                                 </label>
@@ -39,7 +39,15 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="">
-                                    <i class="fa-solid fa-calendar"></i>
+                                    <i class="fa-solid fa-check-square text-success"></i>
+                                    เลือกรหัสโรคที่ต้องการ : ICD10
+                                    <small class="text-danger">** หากต้องการกรองจากรหัสโรคทั้งหมดให้เว้นว่างไว้ **</small>
+                                </label>
+                                <select name='gicd10[]' class="icd10" multiple="multiple"></select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="">
+                                    <i class="fa-regular fa-calendar"></i>
                                     เลือกวันที่
                                 </label>
                                 <div class="form-row">
@@ -53,7 +61,7 @@
                             </div>
                             <div class="form-group col-12">
                                 <label for="">
-                                    <i class="fa-solid fa-hospital-user"></i>
+                                    <i class="fa-regular fa-hospital"></i>
                                     เลือกประเภทผู้ป่วย
                                 </label>
                                 <label class="form-control">
