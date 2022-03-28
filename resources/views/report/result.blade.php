@@ -2,6 +2,55 @@
 @section('content')
 <div class="content">
     <div class="row">
+        <div class="card-body">
+            <div class="alert alert-primary" role="alert">
+                <div class="row">
+                    <div class="col-md-3">
+                        <span class="font-weight-bold">
+                            <i class="fa-regular fa-calendar-check"></i>
+                            วันที่
+                        </span>
+                        <ul>
+                            <li>
+                                {{ DateThai($_REQUEST['start']) ." ถึง ".DateThai($_REQUEST['end']) }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="font-weight-bold">
+                            <i class="fa-regular fa-square-check"></i>
+                            สิทธิ์ที่เลือก
+                        </span>
+                        <ul>
+                            @foreach ($splan as $plan)
+                                <li>{{ $plan->contract_plans_description }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <i class="fa-regular fa-rectangle-xmark"></i>
+                        <span class="font-weight-bold">ICD10 ที่คัดออก</span>
+                        @php $icd = explode(",",$icds); @endphp
+                        <ul>
+                            @foreach ($icd as $res)
+                                <li>{{ $res }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <i class="fa-regular fa-hospital"></i>
+                        <span class="font-weight-bold">ประเภทผู้ป่วย</span>
+                        <ul>
+                            @if ($_REQUEST['vtype'] == 0)
+                            <li>ผู้ป่วยนอก</li>
+                            @else
+                            <li>ผู้ป่วยใน</li>
+                            @endif
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -9,42 +58,6 @@
                         <i class="fa-solid fa-clipboard-list"></i>
                         รายงานค่ารักษาพยาบาล
                     </h5>
-                    <div class="row card-category">
-                        <div class="col-md-3 text-center">
-                            <span>
-                                <i class="fa-regular fa-calendar-check"></i>
-                                {{ DateThai($_REQUEST['start']) ." ถึง ".DateThai($_REQUEST['end']) }}
-                            </span>
-                        </div>
-                        <div class="col-md-3">
-                            <i class="fa-regular fa-square-check"></i>
-                            <span>สิทธิ์ที่เลือก</span>
-                            <ul>
-                                @foreach ($splan as $plan)
-                                    <li>{{ $plan->contract_plans_description }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        <div class="col-md-3">
-                            <i class="fa-regular fa-rectangle-xmark"></i>
-                            <span>ICD10 ที่คัดออก</span>
-                            @php $icd = explode(",",$icds); @endphp
-                            <ul>
-                                @foreach ($icd as $res)
-                                    <li>{{ $res }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        <div class="col-md-3 text-center">
-                            <i class="fa-regular fa-hospital"></i>
-                            <span>ประเภทผู้ป่วย : </span>
-                            @if ($_REQUEST['vtype'] == 0)
-                            <span class="badge badge-success">ผู้ป่วยนอก</span>
-                            @else
-                            <span class="badge badge-info">ผู้ป่วยใน</span>
-                            @endif
-                        </div>
-                    </div>
                 </div>
                 <div class="card-body">
                     <table id="tableExport" class="table table-borderless table-striped">
