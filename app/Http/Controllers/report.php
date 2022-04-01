@@ -118,7 +118,7 @@ class report extends Controller
                 ,f_sex.sex_description,t_patient.patient_pid,t_patient.patient_birthday,b_employee.employee_number
                 ,t_diag_icd10.diag_icd10_number,t_diag_icd9.diag_icd9_icd9_number ,t_visit_payment.visit_payment_main_hospital
                 ,SUM(t_billing.billing_total) AS totalPrice,b_contract_plans.contract_plans_description AS contract_plans_description
-                ,SUBSTRING(t_visit.visit_begin_visit_time,0,11) AS dateVisit 
+                ,t_visit.visit_begin_visit_time AS dateVisit 
             FROM 
             t_visit INNER JOIN t_patient  ON t_visit.t_patient_id = t_patient.t_patient_id 
             LEFT JOIN f_patient_prefix ON t_patient.f_patient_prefix_id = f_patient_prefix.f_patient_prefix_id
