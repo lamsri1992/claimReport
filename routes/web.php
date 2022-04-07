@@ -24,3 +24,8 @@ Route::group(['prefix' => 'report'], function () {
 	Route::post('getIcd10/','report@getIcd10')->name('report.getIcd10');
 	Route::get('process/','report@process')->name('report.process');
 });
+
+Route::group(['prefix' => 'todo'], function () {
+	Route::get('/','todo@index');
+	Route::get('/sendline','todo@sendline');
+});

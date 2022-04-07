@@ -139,6 +139,52 @@
             },
         });
     });
+
+    $(document).ready(function () {
+        $('#tableExport2').dataTable({
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            dom: '<"top"Blf>rt<"bottom"ip><"clear">',
+            buttons: {
+                buttons: [
+                    {
+                        extend: 'print',
+                        text: '<i class="fa fa-print"></i> พิมพ์',
+                        className: 'btn btn-info',
+                        footer: true
+                    },
+                    {
+                        extend: 'excel',
+                        text: '<i class="fa fa-file-excel"></i> Excel',
+                        className: 'btn btn-success',
+                        footer: true
+                    }
+                ],
+                dom: {
+                    button: {
+                        className: 'btn-sm'
+                    }
+                }
+            },
+            // scrollX: true,
+            ordering: false,
+            bLengthChange: false,
+            oLanguage: {
+                oPaginate: {
+                    sFirst: '<small>หน้าแรก</small>',
+                    sLast: '<small>หน้าสุดท้าย</small>',
+                    sNext: '<small>ถัดไป</small>',
+                    sPrevious: '<small>กลับ</small>'
+                },
+                sSearch: '<small><i class="fa fa-search"></i> ค้นหา</small>',
+                sInfo: '<small>ทั้งหมด _TOTAL_ รายการ</small>',
+                sLengthMenu: '<small>แสดง _MENU_ รายการ</small>',
+                sInfoEmpty: '<small>ไม่มีข้อมูล</small>'
+            },
+        });
+    });
             
     // SELECT2
     $(document).ready(function() {
@@ -189,6 +235,22 @@
                 '<li>{{ $error }}</li>' +
                 '@endforeach</ul></div>',
         })
+    </script>
+@endif
+@if($message = Session::get('success'))
+    <script>
+        $(function() {
+            var Toast = Swal.mixin({
+                position: 'top-end',
+                toast: true,
+                showConfirmButton: false,
+                timer: 10000
+            });
+                Toast.fire({
+                icon: 'success',
+                title: '{{ $message }}'
+            })
+        });
     </script>
 @endif
 @section('script')
