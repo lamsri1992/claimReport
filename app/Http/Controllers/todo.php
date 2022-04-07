@@ -167,7 +167,7 @@ class todo extends Controller
             $i ++;
             $text .=  "\n".$i.". HN".$res->visit_hn."\n".$res->visit_patient."\nสิทธิ์".$res->visit_plan."\n";
         }
-        $text2 = "รายการที่ต้องเคลมวันนี้\n จำนวน".$count." ราย\n";
+        $text2 = "รายการที่ต้องเคลมวันนี้\n จำนวน ".$count." ราย\n";
         $Token = "ARuAsomfKbOZlFsueudj8ShjdzZJJKNzvrbfNuDsQ7v";
         $message = $text2.$text;
         line_notify($Token, $message);
