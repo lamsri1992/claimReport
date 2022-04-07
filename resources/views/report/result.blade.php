@@ -70,7 +70,7 @@
                     </h5>
                 </div>
                 <div class="card-body">
-                    <table id="tableExport" class="table table-borderless table-striped">
+                    <table class="table table-borderless table-striped tableExport">
                         <thead class="thead-dark">
                             <tr class="text-center">
                                 <th>วันที่เข้ารับบริการ</th>
