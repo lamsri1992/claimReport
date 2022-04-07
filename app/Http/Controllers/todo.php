@@ -165,12 +165,11 @@ class todo extends Controller
         $i=0;
         foreach ($data as $res){
             $i ++;
-            $text .= "รายการที่ต้องเคลมวันนี้\nสิทธิ์เบิกได้จ่ายตรง - อปท. ".$count." ราย\n\n";
-            $text .=  $i.". HN".$res->visit_hn."\n".$res->visit_patient."\nสิทธิ์".$res->visit_plan."\n";
+            $text .=  "\n".$i.". HN".$res->visit_hn."\n".$res->visit_patient."\nสิทธิ์".$res->visit_plan."\n";
         }
-
+        $text2 = "รายการที่ต้องเคลมวันนี้\n จำนวน".$count." ราย\n";
         $Token = "ARuAsomfKbOZlFsueudj8ShjdzZJJKNzvrbfNuDsQ7v";
-        $message = $text;
+        $message = $text2.$text;
         line_notify($Token, $message);
         return back()->with('success','ส่ง LINE NOTIFY แล้ว');
         // dd($count,$data);
