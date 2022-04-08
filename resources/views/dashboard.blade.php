@@ -2,7 +2,7 @@
 @section('content')
 <div class="content">
     <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-6">
             <div class="card card-stats">
                 <div class="card-body">
                     <div class="row">
@@ -19,7 +19,7 @@
                             <div class="numbers">
                                 <p class="card-category">ค่ารักษาผู้ป่วยนอก</p>
                                 <p class="card-title" style="font-size: 1.5rem;">
-                                    {{ number_format($op_cost,2) }}
+                                    {{ number_format($op_cost,2) }} ฿
                                 <p>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-6">
             <div class="card card-stats">
                 <div class="card-body">
                     <div class="row">
@@ -47,7 +47,7 @@
                             <div class="numbers">
                                 <p class="card-category">ค่ารักษาผู้ป่วยใน</p>
                                 <p class="card-title" style="font-size: 1.5rem;">
-                                    {{ number_format($ip_cost,2) }}
+                                    {{ number_format($ip_cost,2) }} ฿
                                 <p>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-6">
             <div class="card card-stats">
                 <div class="card-body">
                     <div class="row">
@@ -72,7 +72,7 @@
                             <div class="numbers">
                                 <p class="card-category">ค่ายาผู้ป่วยนอก</p>
                                 <p class="card-title" style="font-size: 1.5rem;">
-                                    {{ number_format($cost->cost,2) }}
+                                    {{ number_format($cost->cost,2) }} ฿
                                 <p>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-6">
             <div class="card card-stats">
                 <div class="card-body">
                     <div class="row">
@@ -97,7 +97,7 @@
                             <div class="numbers">
                                 <p class="card-category">ค่ายาผู้ป่วยใน</p>
                                 <p class="card-title" style="font-size: 1.5rem;">
-                                    {{ number_format($cost->cost,2) }}
+                                    {{ number_format($cost->cost,2) }} ฿
                                 <p>
                             </div>
                         </div>
