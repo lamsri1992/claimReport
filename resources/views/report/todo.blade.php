@@ -182,42 +182,33 @@
             cancelButtonText: `ยกเลิก`,
             }).then((result) => {
                 if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'กำลังส่งชุดข้อมูล',
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                        },
+                    }).then((result) => {
+                        if (result.dismiss === Swal.DismissReason.timer) {}
+                    })
                     $.ajax({
-                        url:"{{ route('sendData') }}",
+                        url: "{{ route('sendData') }}",
                         method:'POST',
                         data:{formData: formData,_token: token},
-                        success:function(data){
-                            let timerInterval
-                                Swal.fire({
-                                title: 'กำลังสร้างชุดข้อมูล',
-                                timerProgressBar: true,
-                                didOpen: () => {
-                                    Swal.showLoading()
-                                    timerInterval = setInterval(() => {
-                                    const content = Swal.getContent()
-                                    if (content) {
-                                        const b = content.querySelector('b')
-                                        if (b) {
-                                        b.textContent = Swal.getTimerLeft()
-                                        }
-                                    }
-                                    }, 100)
-                                },
-                                willClose: () => {
-                                    clearInterval(timerInterval)
-                                }
-                                }).then((result) => {
-                                if (result.dismiss === Swal.DismissReason.timer) {
-                                        Swal.fire({
-                                        icon: 'success',
-                                        title: 'ส่งข้อมูลสำเร็จ',
-                                        showConfirmButton: false,
-                                        timer: 3000
-                                    })
-                                    // window.setTimeout(function () {
-                                    //     location.reload()
-                                    // }, 3500);
-                                }
+                        success: function (result) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'สำเร็จ',
+                                text: 'จำนวนข้อมูลที่ถูกส่ง '+ table.rows('.selected').data().length +' รายการ',
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: 'Error: ' + textStatus + ' - ' + errorThrown,
                             })
                         }
                     });

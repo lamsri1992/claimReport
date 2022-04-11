@@ -181,7 +181,7 @@ class todo extends Controller
             $i ++;
             $text .=  "\n".$i.". HN".$res->visit_hn."\n".$res->visit_patient."\nสิทธิ์".$res->visit_plan."\n";
         }
-        $text2 = "รายการที่ต้องเคลมวันนี้\n จำนวน ".$count." ราย\n";
+        $text2 = "รายการที่ดำเนินการตรวจสอบวันนี้\n จำนวน ".$count." ราย\n";
         $Token = "ARuAsomfKbOZlFsueudj8ShjdzZJJKNzvrbfNuDsQ7v";
         $message = $text2.$text;
         line_notify($Token, $message);
@@ -191,8 +191,19 @@ class todo extends Controller
 
     function sendData(Request $request)
     {
-        $data = $request->formData;
-        $case = count($data);
-        dd($case,$data);
+        $data = $request->get('formData');
+        $count = count($data);
+        // return dd($data);
+        $text = "";
+        $i=0;
+        foreach ($data as $res){
+            $i ++;
+            $text .=  "\n".$i.". CID: ".$res[2]."\n"." HN: ".$res[3]."\n".$res[5]."\nสิทธิ์: ".$res[4]."\n". "ค่ารักษา: ".$res[3]."\n". "วันที่: ".$res[0]."\n";
+        }
+        $text2 = "รายการที่ต้องเคลมวันนี้\n จำนวน ".$count." ราย\n";
+        $Token = "ARuAsomfKbOZlFsueudj8ShjdzZJJKNzvrbfNuDsQ7v";
+        $message = $text2.$text;
+        line_notify($Token, $message);
+        
     }
 }

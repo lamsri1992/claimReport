@@ -111,13 +111,13 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card ">
+            <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">รายงานค่ารักษาพยาบาลแยกตามเดือน</h5>
                     <p class="card-category">ปีงบประมาณ 2565</p>
                 </div>
                 <div class="card-body">
-                    <canvas id=chartHours width="400" height="100"></canvas>
+                    Chart Show Data
                 </div>
                 <div class="card-footer">
                     <div class="stats"></div>

@@ -41,8 +41,6 @@
     <script src="{{ asset('paper/assets/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
     <script src="{{ asset('paper/assets/js/plugins/chartjs.min.js') }}"></script>
     <script src="{{ asset('paper/assets/js/plugins/bootstrap-notify.js') }}"></script>
-    <script src="{{ asset('paper/assets/js/paper-dashboard.min.js?v=2.0.1') }}" type="text/javascript"></script>
-    <script src="{{ asset('paper/assets/demo/demo.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
@@ -61,11 +59,6 @@
     <script type="text/javascript" charset="utf8" src="{{ asset('vendor/datepicker/jquery.datetimepicker.full.js') }}"></script>
     <script type="text/javascript" charset="utf8" src="{{ asset('vendor/preload/preload.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            demo.initChartsPages();
-        });
-    </script>
 <script>
  // DATATABLES
  $(document).ready(function () {
