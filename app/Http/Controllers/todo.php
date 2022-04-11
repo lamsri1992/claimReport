@@ -193,17 +193,23 @@ class todo extends Controller
     {
         $data = $request->get('formData');
         $count = count($data);
-        // return dd($data);
-        $text = "";
-        $i=0;
+        // dd($data);
         foreach ($data as $res){
-            $i ++;
-            $text .=  "\n".$i.". CID: ".$res[2]."\n"." HN: ".$res[3]."\n".$res[5]."\nสิทธิ์: ".$res[4]."\n". "ค่ารักษา: ".$res[8]."\n". "วันที่: ".$res[0]."\n";
+            DB::connection('mysql')->table('claim_list')->insert([
+                "visit_date" => $res['0'],
+                "visit_type" => $res['1'],
+                "visit_pid" => $res['2'],
+                "visit_hn" => $res['3'],
+                "visit_plan" => $res['4'],
+                "visit_patient" => $res['5'],
+                "visit_age" => $res['6'],
+                "visit_icd10" => $res['7'],
+                "visit_cost" => $res['8'],
+            ]);
         }
-        $text2 = "รายการที่ต้องเคลมวันนี้\n จำนวน ".$count." ราย\n";
+
         $Token = "ARuAsomfKbOZlFsueudj8ShjdzZJJKNzvrbfNuDsQ7v";
-        $message = $text2.$text;
+        $message = "รายการที่ต้องเคลมวันนี้\n จำนวน ".$count." ราย\n ตรวจสอบได้ที่ระบบ Watchan Claim Report";
         line_notify($Token, $message);
-        
     }
 }

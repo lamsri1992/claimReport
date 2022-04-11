@@ -96,7 +96,7 @@
                             </h6>
                         </div>
                         <div class="card-body">
-                            <table class="table table-borderless table-striped tableExport">
+                            <table class="table table-borderless table-striped tableExport2">
                                 <thead class="thead-dark">
                                     <tr class="text-center">
                                         <th>วันที่</th>
@@ -162,6 +162,66 @@
     $(document).ready(function() {
         var table = $('.tableExport').DataTable();
         $('.tableExport tbody').on( 'click', 'tr', function () {
+            $(this).toggleClass('selected');
+
+        });
+    
+        $('#sendData').click( function () {
+            var token = "{{ csrf_token() }}";
+            var array = [];
+
+            table.rows('.selected').every(function(rowIdx) {
+                array.push(table.row(rowIdx).data())
+            })
+            var formData = array;
+        Swal.fire({
+            icon: 'warning',
+            title: 'ยืนยันการส่งข้อมูล ?',
+            text: 'จำนวนข้อมูลที่เลือก '+ table.rows('.selected').data().length +' รายการ',
+            showCancelButton: true,
+            confirmButtonText: `ส่งข้อมูล`,
+            cancelButtonText: `ยกเลิก`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'กำลังส่งชุดข้อมูล',
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                        },
+                    }).then((result) => {
+                        if (result.dismiss === Swal.DismissReason.timer) {}
+                    })
+                    $.ajax({
+                        url: "{{ route('sendData') }}",
+                        method:'POST',
+                        data:{formData: formData,_token: token},
+                        success: function (result) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'สำเร็จ',
+                                text: 'จำนวนข้อมูลที่ถูกส่ง '+ table.rows('.selected').data().length +' รายการ',
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'พบข้อผิดพลาด',
+                                text: 'กรุณาเลือกข้อมูลอย่างน้อย 1 รายการ',
+                            })
+                        }
+                    });
+                }
+            })
+        });
+    });
+
+    $(document).ready(function() {
+        var table = $('.tableExport2').DataTable();
+        $('.tableExport2 tbody').on( 'click', 'tr', function () {
             $(this).toggleClass('selected');
 
         });

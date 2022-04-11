@@ -26,7 +26,13 @@
             <li class="{{ request()->is('todo*') ? 'active':'' }}">
                 <a href="{{ url('todo') }}">
                     <i class="fa-solid fa-clipboard-list"></i>
-                    <p style="font-size: 0.85rem;">Todo List</p>
+                    <p style="font-size: 0.85rem;">รายการรอตรวจสอบ</p>
+                </a>
+            </li>
+            <li class="{{ request()->is('claim*') ? 'active':'' }}">
+                <a href="{{ url('claim') }}">
+                    <i class="fa-solid fa-list-check"></i>
+                    <p style="font-size: 0.85rem;">รายการรอดำเนินการ</p>
                 </a>
             </li>
             <li>
