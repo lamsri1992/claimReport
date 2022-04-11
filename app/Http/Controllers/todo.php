@@ -198,7 +198,7 @@ class todo extends Controller
         $i=0;
         foreach ($data as $res){
             $i ++;
-            $text .=  "\n".$i.". CID: ".$res[2]."\n"." HN: ".$res[3]."\n".$res[5]."\nสิทธิ์: ".$res[4]."\n". "ค่ารักษา: ".$res[3]."\n". "วันที่: ".$res[0]."\n";
+            $text .=  "\n".$i.". CID: ".$res[2]."\n"." HN: ".$res[3]."\n".$res[5]."\nสิทธิ์: ".$res[4]."\n". "ค่ารักษา: ".$res[8]."\n". "วันที่: ".$res[0]."\n";
         }
         $text2 = "รายการที่ต้องเคลมวันนี้\n จำนวน ".$count." ราย\n";
         $Token = "ARuAsomfKbOZlFsueudj8ShjdzZJJKNzvrbfNuDsQ7v";

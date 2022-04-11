@@ -12,14 +12,6 @@
                     <li>สิทธิ์เบิกได้จ่ายตรง {{ count($ofc) }} ราย</li>
                     <li>สิทธิ์เบิกได้จ่ายตรง (อปท.) {{ count($lgo) }} ราย</li>
                 </ul>
-                <a href="{{ url('todo/sendline') }}" class="btn btn-sm btn-success">
-                    <i class="fa-brands fa-line"></i>
-                    Send Line
-                </a>
-                <button id="sendData" class="btn btn-info btn-sm">
-                    <i class="fa-solid fa-send"></i>
-                    ส่งข้อมูล
-                </button>
             </div>
             <div class="card-tp">
                 <nav>
@@ -74,7 +66,7 @@
                                         <td class="text-left">{{ $res->visit_patient }}</td>
                                         <td>{{ $res->visit_age }}</td>
                                         <td>{{ $res->visit_icd10 }}</td>
-                                        <td class="text-right">{{ number_format($res->visit_cost,2)." ฿" }}</td>
+                                        <td class="text-right">{{ number_format($res->visit_cost,2) }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -84,7 +76,7 @@
                                             รวมค่ารักษาพยาบาล
                                         </td>
                                         <td class="text-left" colspan="5">
-                                            {{ number_format($cost,2)." ฿" }}
+                                            {{ number_format($cost,2) }}
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -133,17 +125,17 @@
                                         <td class="text-left">{{ $res->visit_patient }}</td>
                                         <td>{{ $res->visit_age }}</td>
                                         <td>{{ $res->visit_icd10 }}</td>
-                                        <td class="text-right">{{ number_format($res->visit_cost,2)." ฿" }}</td>
+                                        <td class="text-right">{{ number_format($res->visit_cost,2) }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr class="font-weight-bold">
-                                        <td class="text-right" colspan="5">
+                                        <td class="text-right" colspan="4">
                                             รวมค่ารักษาพยาบาล
                                         </td>
-                                        <td class="text-left" colspan="4">
-                                            {{ number_format($cost,2)." ฿" }}
+                                        <td class="text-left" colspan="5">
+                                            {{ number_format($cost,2) }}
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -155,6 +147,12 @@
                     </div>
                 </div>
             </div>
+            <div style="margin-top: -1rem;">
+                <button id="sendData" class="btn btn-info">
+                    <i class="fa-solid fa-send"></i>
+                    ส่งข้อมูล
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -165,6 +163,7 @@
         var table = $('.tableExport').DataTable();
         $('.tableExport tbody').on( 'click', 'tr', function () {
             $(this).toggleClass('selected');
+
         });
     
         $('#sendData').click( function () {
@@ -176,7 +175,9 @@
             })
             var formData = array;
         Swal.fire({
+            icon: 'warning',
             title: 'ยืนยันการส่งข้อมูล ?',
+            text: 'จำนวนข้อมูลที่เลือก '+ table.rows('.selected').data().length +' รายการ',
             showCancelButton: true,
             confirmButtonText: `ส่งข้อมูล`,
             cancelButtonText: `ยกเลิก`,
@@ -208,7 +209,8 @@
                         error: function (jqXHR, textStatus, errorThrown) {
                             Swal.fire({
                                 icon: 'error',
-                                text: 'Error: ' + textStatus + ' - ' + errorThrown,
+                                title: 'พบข้อผิดพลาด',
+                                text: 'กรุณาเลือกข้อมูลอย่างน้อย 1 รายการ',
                             })
                         }
                     });

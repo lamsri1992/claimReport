@@ -113,6 +113,7 @@ class claim extends Controller
                 AND substring(visit_financial_discharge_time,1,10) BETWEEN SUBSTRING('2564-10-01',1,10) AND SUBSTRING('2565-09-30',1,10)
                 GROUP BY  t_order.order_common_name ,order_qty ,order_date_time) as q1 ");
                 
-        return view('dashboard',['opd'=>$opd,'ipd'=>$ipd,'phopd'=>$phopd,'phipd'=>$phipd]);
+        $list = DB::connection('mysql')->table('claim_list')->where('visit_status',0)->get();
+        return view('dashboard',['opd'=>$opd,'ipd'=>$ipd,'phopd'=>$phopd,'phipd'=>$phipd,'list'=>$list]);
     }
 }
