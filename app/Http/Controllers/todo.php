@@ -9,11 +9,18 @@ class todo extends Controller
 {
     public function index()
     {
+        $ckDay = date('w');
         $sDay = date("d");
         $sMonth = date("m");
         $sYear = date("Y")+543;
         $sNew = $sYear."-".$sMonth."-".$sDay;
-        $sQry = date("Y-m-d",strtotime("-1 days",strtotime($sNew)));
+        if($ckDay == 1){
+            $sQry = date("Y-m-d",strtotime("-3 days",strtotime($sNew)));
+            $eQry = date("Y-m-d",strtotime("-1 days",strtotime($sNew)));
+        }else{
+            $sQry = date("Y-m-d",strtotime("-1 days",strtotime($sNew)));
+            $eQry = date("Y-m-d",strtotime("-1 days",strtotime($sNew)));
+        }
 
         $ofc = DB::select("SELECT query1.dateVisit AS visit_date,query1.patient_pid AS visit_pid,
                 query1.visit_hn AS visit_hn,query1.contract_plans_description as visit_plan,
@@ -44,9 +51,9 @@ class todo extends Controller
                 AND t_visit_payment.visit_payment_active ='1'
                 AND t_visit_payment.visit_payment_priority = '0'
                 AND t_billing.billing_active ='1'
-                AND (SUBSTRING(t_visit.visit_begin_visit_time,1,10) BETWEEN ('$sQry') AND ('$sQry'))
+                AND (SUBSTRING(t_visit.visit_begin_visit_time,1,10) BETWEEN ('$sQry') AND ('$eQry'))
                 AND b_contract_plans.b_contract_plans_id IN ('212237369210884755')
-                AND t_diag_icd10.diag_icd10_number NOT IN ('Z11.5','U11.9')
+                AND t_diag_icd10.diag_icd10_number NOT IN ('Z11.5','U11.9','U07.2','U07.2','Z29.0')
             GROUP BY 
                 t_visit.t_visit_id,f_patient_prefix.patient_prefix_description,t_patient.patient_firstname
                 ,t_patient.patient_lastname,t_patient.patient_pid,t_patient.patient_birthday,b_employee.employee_number
@@ -89,9 +96,9 @@ class todo extends Controller
                 AND t_visit_payment.visit_payment_active ='1'
                 AND t_visit_payment.visit_payment_priority = '0'
                 AND t_billing.billing_active ='1'
-                AND (SUBSTRING(t_visit.visit_begin_visit_time,1,10) BETWEEN ('$sQry') AND ('$sQry'))
+                AND (SUBSTRING(t_visit.visit_begin_visit_time,1,10) BETWEEN ('$sQry') AND ('$eQry'))
                 AND b_contract_plans.b_contract_plans_id IN ('212237367483846128')
-                AND t_diag_icd10.diag_icd10_number NOT IN ('Z11.5','U11.9')
+                AND t_diag_icd10.diag_icd10_number NOT IN ('Z11.5','U11.9','U07.2','U07.2','Z29.0')
             GROUP BY 
                 t_visit.t_visit_id,f_patient_prefix.patient_prefix_description,t_patient.patient_firstname
                 ,t_patient.patient_lastname,t_patient.patient_pid,t_patient.patient_birthday,b_employee.employee_number
@@ -110,11 +117,18 @@ class todo extends Controller
 
     public function sendline()
     {
+        $ckDay = date('w');
         $sDay = date("d");
         $sMonth = date("m");
         $sYear = date("Y")+543;
         $sNew = $sYear."-".$sMonth."-".$sDay;
-        $sQry = date("Y-m-d",strtotime("-1 days",strtotime($sNew)));
+        if($ckDay == 1){
+            $sQry = date("Y-m-d",strtotime("-3 days",strtotime($sNew)));
+            $eQry = date("Y-m-d",strtotime("-1 days",strtotime($sNew)));
+        }else{
+            $sQry = date("Y-m-d",strtotime("-1 days",strtotime($sNew)));
+            $eQry = date("Y-m-d",strtotime("-1 days",strtotime($sNew)));
+        }
 
         $data = DB::select("SELECT query1.dateVisit AS visit_date,query1.patient_pid AS visit_pid,
                 query1.visit_hn AS visit_hn,query1.contract_plans_description as visit_plan,
@@ -145,9 +159,9 @@ class todo extends Controller
                 AND t_visit_payment.visit_payment_active ='1'
                 AND t_visit_payment.visit_payment_priority = '0'
                 AND t_billing.billing_active ='1'
-                AND (SUBSTRING(t_visit.visit_begin_visit_time,1,10) BETWEEN ('$sQry') AND ('$sQry'))
+                AND (SUBSTRING(t_visit.visit_begin_visit_time,1,10) BETWEEN ('$sQry') AND ('$eQry'))
                 AND b_contract_plans.b_contract_plans_id IN ('212237369210884755','212237367483846128')
-                AND t_diag_icd10.diag_icd10_number NOT IN ('Z11.5','U11.9')
+                AND t_diag_icd10.diag_icd10_number NOT IN ('Z11.5','U11.9','U07.2','U07.2','Z29.0')
             GROUP BY 
                 t_visit.t_visit_id,f_patient_prefix.patient_prefix_description,t_patient.patient_firstname
                 ,t_patient.patient_lastname,t_patient.patient_pid,t_patient.patient_birthday,b_employee.employee_number
@@ -173,5 +187,12 @@ class todo extends Controller
         line_notify($Token, $message);
         return back()->with('success','ส่ง LINE NOTIFY แล้ว');
         // dd($count,$data);
+    }
+
+    function sendData(Request $request)
+    {
+        $data = $request->formData;
+        $case = count($data);
+        dd($case,$data);
     }
 }

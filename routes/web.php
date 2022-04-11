@@ -28,4 +28,5 @@ Route::group(['prefix' => 'report'], function () {
 Route::group(['prefix' => 'todo'], function () {
 	Route::get('/','todo@index');
 	Route::get('/sendline','todo@sendline');
+	Route::post('/sendData','todo@sendData')->name('sendData');
 });

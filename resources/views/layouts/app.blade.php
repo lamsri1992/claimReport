@@ -122,11 +122,6 @@
                     }
                 }
             },
-                rowReorder: {
-                selector: 'td:nth-child(2)'
-            },
-            responsive: true,
-            // scrollX: true,
             ordering: false,
             bLengthChange: false,
             oLanguage: {
