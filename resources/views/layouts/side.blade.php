@@ -32,7 +32,7 @@
             <li class="{{ request()->is('claim*') ? 'active':'' }}">
                 <a href="{{ url('claim') }}">
                     <i class="fa-solid fa-list-check"></i>
-                    <p style="font-size: 0.85rem;">รายการรอดำเนินการ</p>
+                    <p style="font-size: 0.85rem;">ข้อมูลรายการเคลม</p>
                 </a>
             </li>
             <li>

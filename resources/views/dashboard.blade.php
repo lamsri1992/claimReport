@@ -116,14 +116,14 @@
                     <div class="row">
                         <div class="col-5 col-md-4">
                             <div class="icon-big text-center icon-warning">
-                                <i class="fa-solid fa-clipboard-list text-info"></i>
+                                <i class="fa-solid fa-clipboard text-warning"></i>
                             </div>
                         </div>
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">ทั้งหมด</p>
                                 <p class="card-title" style="font-size: 1.5rem;">
-                                   xx
+                                    {{ count($all) }}
                                 <p>
                             </div>
                         </div>
@@ -140,14 +140,14 @@
                     <div class="row">
                         <div class="col-5 col-md-4">
                             <div class="icon-big text-center icon-warning">
-                                <i class="fa-solid fa-list-check text-warning"></i>
+                                <i class="fa-solid fa-spinner fa-spin text-info"></i>
                             </div>
                         </div>
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">รอดำเนินการ</p>
                                 <p class="card-title" style="font-size: 1.5rem;">
-                                    xx
+                                    {{ $wait }}
                                 <p>
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                             <div class="numbers">
                                 <p class="card-category">ดำเนินการแล้ว</p>
                                 <p class="card-title" style="font-size: 1.5rem;">
-                                   xx
+                                   {{ $res }}
                                 <p>
                             </div>
                         </div>
@@ -195,7 +195,7 @@
                             <div class="numbers">
                                 <p class="card-category">ค้างชำระ</p>
                                 <p class="card-title" style="font-size: 1.5rem;">
-                                    xx
+                                    {{ count($list) }}
                                 <p>
                             </div>
                         </div>
@@ -213,10 +213,7 @@
                 <div class="card-header">
                     <h5 class="card-title">
                         <i class="fa-solid fa-file-invoice-dollar text-secondary"></i>
-                        รายงานลูกหนี้ค้างชำระ สิทธิ์เบิกได้จ่ายตรง
-                        <span class="badge badge-danger">
-                            {{ count($list) }} ราย
-                        </span>
+                        รายงานลูกหนี้ค้างชำระ
                     </h5>
                 </div>
                 <div class="card-body">
@@ -264,9 +261,6 @@
                             </tr>
                         </tfoot>
                     </table>
-                </div>
-                <div class="card-footer">
-                    <div class="stats"></div>
                 </div>
             </div>
         </div>

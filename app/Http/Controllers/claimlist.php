@@ -10,7 +10,10 @@ class claimlist extends Controller
     public function index()
     {
         $list = DB::connection('mysql')->table('claim_list')->where('visit_status',9)->get();
-        return view('claimlist.index',['list'=>$list]);
+        $all = DB::connection('mysql')->table('claim_list')->leftjoin('claim_status','sta_no','visit_status')->get();
+        $res = DB::connection('mysql')->table('claim_list')->where('visit_status',1)->get();
+        $lost = DB::connection('mysql')->table('claim_list')->where('visit_status',0)->get();
+        return view('claimlist.index',['list'=>$list,'all'=>$all,'res'=>$res,'lost'=>$lost]);
     }
 
     public function confirm($id)

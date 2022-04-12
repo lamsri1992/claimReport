@@ -8,14 +8,14 @@
                     <div class="row">
                         <div class="col-5 col-md-4">
                             <div class="icon-big text-center icon-warning">
-                                <i class="fa-solid fa-clipboard-list text-info"></i>
+                                <i class="fa-solid fa-clipboard text-warning"></i>
                             </div>
                         </div>
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">ทั้งหมด</p>
                                 <p class="card-title" style="font-size: 1.5rem;">
-                                   xx
+                                   {{ count($all) }}
                                 <p>
                             </div>
                         </div>
@@ -32,14 +32,14 @@
                     <div class="row">
                         <div class="col-5 col-md-4">
                             <div class="icon-big text-center icon-warning">
-                                <i class="fa-solid fa-list-check text-warning"></i>
+                                <i class="fa-solid fa-spinner fa-spin text-info"></i>
                             </div>
                         </div>
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">รอดำเนินการ</p>
                                 <p class="card-title" style="font-size: 1.5rem;">
-                                    xx
+                                    {{ count($list) }}
                                 <p>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                             <div class="numbers">
                                 <p class="card-category">ดำเนินการแล้ว</p>
                                 <p class="card-title" style="font-size: 1.5rem;">
-                                   xx
+                                   {{ count($res) }}
                                 <p>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                             <div class="numbers">
                                 <p class="card-category">ค้างชำระ</p>
                                 <p class="card-title" style="font-size: 1.5rem;">
-                                    xx
+                                    {{ count($lost) }}
                                 <p>
                             </div>
                         </div>
@@ -104,11 +104,8 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
-                        <i class="fa-solid fa-list-check text-secondary"></i>
-                        รายการรอดำเนินการ
-                        <span class="badge badge-danger">
-                            {{ count($list) }} ราย
-                        </span>
+                        <i class="fa-solid fa-clipboard text-secondary"></i>
+                        รายการเคลมทั้งหมด
                     </h5>
                 </div>
                 <div class="card-body">
@@ -124,12 +121,12 @@
                                 <th>อายุ</th>
                                 <th>ICD10</th>
                                 <th>ค่ารักษา</th>
-                                <th class="text-center">ตรวจสอบ</th>
+                                <th class="text-center">สถานะ</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php $cost = 0; @endphp
-                            @foreach ($list as $res)
+                            @foreach ($all as $res)
                             @php $cost += $res->visit_cost @endphp
                             <tr class="text-center">
                                 <td>{{ $res->visit_date }}</td>
@@ -144,13 +141,17 @@
                                 <td>{{ $res->visit_icd10 }}</td>
                                 <td class="text-right">{{ number_format($res->visit_cost,2) }} ฿</td>
                                 <td class="text-center">
+                                    {!! $res->sta_icon !!}
+                                    {{ $res->sta_name }}
+                                </td>
+                                {{-- <td class="text-center">
                                     <a href="{{ route('claim.confirm',$res->id) }}" class="btn btn-success btn-sm">
                                         <i class="fa-solid fa-circle-check"></i>
                                     </a>
                                     <a href="{{ route('claim.decline',$res->id) }}" class="btn btn-danger btn-sm">
                                         <i class="fa-solid fa-circle-xmark"></i>
                                     </a>
-                                </td>
+                                </td> --}}
                             </tr>
                             @endforeach
                         </tbody>

@@ -114,6 +114,9 @@ class claim extends Controller
                 GROUP BY  t_order.order_common_name ,order_qty ,order_date_time) as q1 ");
                 
         $list = DB::connection('mysql')->table('claim_list')->where('visit_status',0)->get();
-        return view('dashboard',['opd'=>$opd,'ipd'=>$ipd,'phopd'=>$phopd,'phipd'=>$phipd,'list'=>$list]);
+        $all = DB::connection('mysql')->table('claim_list')->leftjoin('claim_status','sta_no','visit_status')->get();
+        $res = DB::connection('mysql')->table('claim_list')->where('visit_status',1)->count();
+        $wait = DB::connection('mysql')->table('claim_list')->where('visit_status',9)->count();
+        return view('dashboard',['opd'=>$opd,'ipd'=>$ipd,'phopd'=>$phopd,'phipd'=>$phipd,'list'=>$list,'wait'=>$wait,'all'=>$all,'res'=>$res]);
     }
 }
