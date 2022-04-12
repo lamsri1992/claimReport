@@ -22,7 +22,9 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="stats"></div>
+                    <div class="text-center">
+                        <a href="#">รายละเอียด</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -46,7 +48,9 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="stats"></div>
+                    <div class="text-center">
+                        <a href="{{ url('/claim/list') }}">รายละเอียด</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,7 +74,9 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="stats"></div>
+                    <div class="text-center">
+                        <a href="#">รายละเอียด</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -94,7 +100,9 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="stats"></div>
+                    <div class="text-center">
+                        <a href="#">รายละเอียด</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -144,14 +152,6 @@
                                     {!! $res->sta_icon !!}
                                     {{ $res->sta_name }}
                                 </td>
-                                {{-- <td class="text-center">
-                                    <a href="{{ route('claim.confirm',$res->id) }}" class="btn btn-success btn-sm">
-                                        <i class="fa-solid fa-circle-check"></i>
-                                    </a>
-                                    <a href="{{ route('claim.decline',$res->id) }}" class="btn btn-danger btn-sm">
-                                        <i class="fa-solid fa-circle-xmark"></i>
-                                    </a>
-                                </td> --}}
                             </tr>
                             @endforeach
                         </tbody>
@@ -166,9 +166,6 @@
                             </tr>
                         </tfoot>
                     </table>
-                </div>
-                <div class="card-footer">
-                    <div class="stats"></div>
                 </div>
             </div>
         </div>

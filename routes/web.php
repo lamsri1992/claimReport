@@ -33,6 +33,7 @@ Route::group(['prefix' => 'todo'], function () {
 
 Route::group(['prefix' => 'claim'], function () {
 	Route::get('/','claimlist@index');
+	Route::get('/list','claimlist@list');
 	Route::get('/confirm/{id}','claimlist@confirm')->name('claim.confirm');
 	Route::get('/decline/{id}','claimlist@decline')->name('claim.decline');
 });

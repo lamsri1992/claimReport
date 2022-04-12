@@ -16,6 +16,12 @@ class claimlist extends Controller
         return view('claimlist.index',['list'=>$list,'all'=>$all,'res'=>$res,'lost'=>$lost]);
     }
 
+    public function list()
+    {
+        $list = DB::connection('mysql')->table('claim_list')->where('visit_status',9)->get();
+        return view('claimlist.list',['list'=>$list]);
+    }
+
     public function confirm($id)
     {
         DB::connection('mysql')->table('claim_list')->where('id',$id)->update([
