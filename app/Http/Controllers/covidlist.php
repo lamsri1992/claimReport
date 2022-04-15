@@ -52,7 +52,7 @@ class covidlist extends Controller
                 -- AND t_billing.billing_active ='1'
                 AND (SUBSTRING(t_visit.visit_begin_visit_time,1,10) BETWEEN ('$sNew') AND ('$eNew'))
                 AND b_contract_plans.b_contract_plans_id NOT IN ('2120000000044','2120000000039','0000000000000')
-                AND t_order.b_item_id = '174237368279260568'
+                AND t_order.b_item_id IN ('174237368279260568')
                 AND t_result_lab.result_lab_value = 'Negative'
             GROUP BY 
                 t_visit.t_visit_id,f_patient_prefix.patient_prefix_description,t_patient.patient_firstname
