@@ -35,6 +35,12 @@
                     <p style="font-size: 0.85rem;">ข้อมูลรายการเคลม</p>
                 </a>
             </li>
+            <li class="{{ request()->is('covid*') ? 'active':'' }}">
+                <a href="{{ url('covid') }}">
+                    <i class="fa-solid fa-virus-covid"></i>
+                    <p style="font-size: 0.85rem;">ข้อมูลเคลม Covid-19</p>
+                </a>
+            </li>
             <li>
                 <a href="{{ url('http://172.20.55.254:8850/RPClient/index/') }}" target="_blank">
                     <i class="fa-solid fa-file-lines"></i>

@@ -37,3 +37,8 @@ Route::group(['prefix' => 'claim'], function () {
 	Route::get('/confirm/{id}','claimlist@confirm')->name('claim.confirm');
 	Route::get('/decline/{id}','claimlist@decline')->name('claim.decline');
 });
+
+Route::group(['prefix' => 'covid'], function () {
+	Route::get('/','covidlist@index');
+	Route::get('/process','covidlist@process')->name('covid.process');
+});
