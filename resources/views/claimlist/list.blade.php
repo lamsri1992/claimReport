@@ -43,7 +43,7 @@
                                 <td class="text-left">{{ $res->visit_patient }}</td>
                                 <td>{{ $res->visit_age }}</td>
                                 <td>{{ $res->visit_icd10 }}</td>
-                                <td class="text-right">{{ number_format($res->visit_cost,2) }} ฿</td>
+                                <td class="text-right">{{ $res->visit_cost }} ฿</td>
                                 <td class="text-center">
                                     <a href="{{ route('claim.confirm',$res->id) }}" class="btn btn-success btn-sm">
                                         <i class="fa-solid fa-circle-check"></i>

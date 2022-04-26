@@ -109,16 +109,16 @@ class report extends Controller
 
         $data = DB::select("SELECT query1.dateVisit AS visit_date,query1.patient_pid AS visit_pid,
                 query1.visit_hn AS visit_hn,query1.contract_plans_description as visit_plan,
-                query1.patient_prefix_description || ' ' || query1.patient_firstname || ' ' || query1.patient_lastname AS visit_patient,
+                query1.patient_prefix_description || '' || query1.patient_firstname || ' ' || query1.patient_lastname AS visit_patient,
                 query1.sex_description AS visit_gender,query1.visit_patient_age AS visit_age,query1.diag_icd10_number AS visit_icd10,
-                query1.diag_icd9_icd9_number AS visit_icd9,query1.totalPrice AS visit_cost
+                query1.diag_icd9_icd9_number AS visit_icd9,query1.totalPrice AS visit_cost,query1.p_type AS p_type
             FROM 
             (SELECT t_visit.t_visit_id,t_visit.visit_hn,t_visit.visit_vn,t_visit.visit_patient_age
                 ,f_patient_prefix.patient_prefix_description,t_patient.patient_firstname,t_patient.patient_lastname
                 ,f_sex.sex_description,t_patient.patient_pid,t_patient.patient_birthday,b_employee.employee_number
                 ,t_diag_icd10.diag_icd10_number,t_diag_icd9.diag_icd9_icd9_number ,t_visit_payment.visit_payment_main_hospital
                 ,SUM(t_billing.billing_total) AS totalPrice,b_contract_plans.contract_plans_description AS contract_plans_description
-                ,t_visit.visit_begin_visit_time AS dateVisit 
+                ,t_visit.visit_begin_visit_time AS dateVisit ,t_visit.f_visit_type_id AS p_type
             FROM 
             t_visit INNER JOIN t_patient  ON t_visit.t_patient_id = t_patient.t_patient_id 
             LEFT JOIN f_patient_prefix ON t_patient.f_patient_prefix_id = f_patient_prefix.f_patient_prefix_id
@@ -150,7 +150,7 @@ class report extends Controller
                 query1.dateVisit,query1.visit_hn,query1.visit_vn,query1.patient_prefix_description,query1.patient_firstname
                 ,query1.patient_lastname ,query1.patient_pid,query1.patient_birthday,query1.employee_number,query1.diag_icd10_number
                 ,query1.visit_payment_main_hospital	,query1.sex_description,query1.visit_patient_age,query1.contract_plans_description
-                ,query1.diag_icd9_icd9_number,query1.totalPrice
+                ,query1.diag_icd9_icd9_number,query1.totalPrice,query1.p_type
             ORDER BY
                 query1.dateVisit,query1.visit_hn");
 
