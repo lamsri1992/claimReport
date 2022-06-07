@@ -3,7 +3,7 @@
         <div class="row">
             <nav class="footer-nav">
                 <ul>
-                    <li><a href="#">ระบบรายงานเคลมค่ารักษาพยาบาล</a></li>
+                    <li><a href="#">กลุ่มงานประกันสุขภาพ ยุทธสาสตร์ และสารสนเทศทางการแพทย์</a></li>
                 </ul>
             </nav>
             <div class="credits ml-auto">

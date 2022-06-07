@@ -74,7 +74,6 @@
                         <thead class="thead-dark">
                             <tr class="text-center">
                                 <th>วันที่เข้ารับบริการ</th>
-                                <th>ประเภท</th>
                                 <th>หมายเลข 13 หลัก</th>
                                 <th>HN</th>
                                 <th>สิทธิ์รักษา</th>
@@ -90,9 +89,6 @@
                             @php $cost += $res->visit_cost @endphp
                             <tr class="text-center">
                                 <td>{{ $res->visit_date }}</td>
-                                <td>
-                                    {{ ($res->p_type == 0) ? 'OPD':'IPD' }}
-                                </td>
                                 <td>{{ $res->visit_pid }}</td>
                                 <td>{{ $res->visit_hn }}</td>
                                 <td>{{ $res->visit_plan }}</td>

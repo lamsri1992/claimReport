@@ -15,7 +15,6 @@
                         <thead class="thead-dark">
                             <tr class="text-center">
                                 <th>วันที่</th>
-                                <th>ประเภท</th>
                                 <th>CID</th>
                                 <th>HN</th>
                                 <th>สิทธิ์รักษา</th>
@@ -34,9 +33,6 @@
                             @php $cost += $res->visit_cost @endphp
                             <tr class="text-center">
                                 <td>{{ $res->visit_date }}</td>
-                                <td>
-                                    {{ ($res->visit_type == 0) ? 'OPD':'IPD' }}
-                                </td>
                                 <td>{{ $res->visit_pid }}</td>
                                 <td>{{ $res->visit_hn }}</td>
                                 <td>{{ $res->visit_plan }}</td>
@@ -45,10 +41,64 @@
                                 <td>{{ $res->visit_icd10 }}</td>
                                 <td class="text-right">{{ number_format($res->visit_cost,2) }} ฿</td>
                                 <td class="text-center">
-                                    <a href="{{ route('claim.confirm',$res->id) }}" class="btn btn-success btn-sm">
+                                    <a href="#" class="btn btn-success btn-sm" data-id="{{ $res->id }}"
+                                        onclick="
+                                            var id = $(this).attr('data-id');
+                                                event.preventDefault();
+                                                Swal.fire({
+                                                    icon: 'success',
+                                                    title: 'ยืนยันการดำเนินการ ?',
+                                                    showCancelButton: true,
+                                                    confirmButtonText: `ยืนยัน`,
+                                                    cancelButtonText: `ยกเลิก`,
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        $.ajax({
+                                                            url: '{{ route('claim.confirm',$res->id) }}',
+                                                            success: function (data) {
+                                                                Swal.fire({
+                                                                    icon: 'success',
+                                                                    title: 'ดำเนินการเสร็จสิ้น',
+                                                                    showConfirmButton: false,
+                                                                    timer: 3000
+                                                                })
+                                                                window.setTimeout(function () {
+                                                                    location.reload()
+                                                                }, 1500);
+                                                            }
+                                                        });
+                                                    }
+                                                });">
                                         <i class="fa-solid fa-circle-check"></i>
                                     </a>
-                                    <a href="{{ route('claim.decline',$res->id) }}" class="btn btn-danger btn-sm">
+                                    <a href="#" class="btn btn-danger btn-sm" data-id="{{ $res->id }}"
+                                        onclick="
+                                        var id = $(this).attr('data-id');
+                                            event.preventDefault();
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'ยืนยันการดำเนินการ ?',
+                                                showCancelButton: true,
+                                                confirmButtonText: `ยืนยัน`,
+                                                cancelButtonText: `ยกเลิก`,
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    $.ajax({
+                                                        url: '{{ route('claim.decline',$res->id) }}',
+                                                        success: function (data) {
+                                                            Swal.fire({
+                                                                icon: 'error',
+                                                                title: 'ดำเนินการเสร็จสิ้น',
+                                                                showConfirmButton: false,
+                                                                timer: 3000
+                                                            })
+                                                            window.setTimeout(function () {
+                                                                location.reload()
+                                                            }, 1500);
+                                                        }
+                                                    });
+                                                }
+                                            });">
                                         <i class="fa-solid fa-circle-xmark"></i>
                                     </a>
                                 </td>
