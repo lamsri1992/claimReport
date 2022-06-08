@@ -117,6 +117,30 @@ class claim extends Controller
         $all = DB::connection('mysql')->table('claim_list')->leftjoin('claim_status','sta_no','visit_status')->get();
         $res = DB::connection('mysql')->table('claim_list')->where('visit_status',1)->count();
         $wait = DB::connection('mysql')->table('claim_list')->where('visit_status',9)->count();
-        return view('dashboard',['opd'=>$opd,'ipd'=>$ipd,'phopd'=>$phopd,'phipd'=>$phipd,'list'=>$list,'wait'=>$wait,'all'=>$all,'res'=>$res]);
+
+        $report = DB::select(DB::raw("SELECT b_contract_plans.contract_plans_description
+                ,count(DISTINCT CASE WHEN t_visit.f_visit_type_id='1'
+                            THEN t_visit.visit_vn
+                            ELSE NULL END) as count_visit_ipd
+                ,count(distinct CASE WHEN t_visit.f_visit_type_id='0'
+                                THEN t_visit.visit_vn
+                                ELSE NULL END) as count_visit_opd
+                ,count(distinct CASE WHEN t_visit.f_visit_type_id='1'
+                                THEN t_patient.patient_hn
+                                ELSE NULL END) as count_patient_ipd
+                ,count(distinct CASE WHEN t_visit.f_visit_type_id='0'
+                                THEN  t_patient.patient_hn
+                                ELSE NULL END) as count_patient_opd
+                FROM t_visit
+                JOIN t_patient ON t_patient.t_patient_id = t_visit.t_patient_id
+                LEFT JOIN t_visit_payment ON t_visit.t_visit_id = t_visit_payment.t_visit_id
+                    AND t_visit_payment.visit_payment_active='1'
+                    AND t_visit_payment.visit_payment_priority='0'
+                LEFT JOIN b_contract_plans ON t_visit_payment.b_contract_plans_id = b_contract_plans.b_contract_plans_id
+                WHERE t_visit.f_visit_status_id NOT IN ('4')
+                    AND substr(visit_begin_visit_time,1,10) BETWEEN substr('2565-06-01',1,10) AND substr('2565-06-30',1,10)
+                GROUP BY b_contract_plans.contract_plans_description"));
+        // dd($report);
+        return view('dashboard',['opd'=>$opd,'ipd'=>$ipd,'phopd'=>$phopd,'phipd'=>$phipd,'list'=>$list,'wait'=>$wait,'all'=>$all,'res'=>$res,'report'=>$report]);
     }
 }
