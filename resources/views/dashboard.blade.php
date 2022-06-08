@@ -116,7 +116,7 @@
     <div class="row">
         <div class="col-md-12">
             <h6>
-                <i class="fa-solid fa-file-invoice-dollar text-secondary"></i>
+                <i class="fa-solid fa-clipboard-list text-secondary"></i>
                 รายงานข้อมูลการรับบริการแยกตามสิทธิ์
             </h6>
             <div class="card">
