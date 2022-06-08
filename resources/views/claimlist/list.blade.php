@@ -110,7 +110,7 @@
                                 <td class="text-right" colspan="5">
                                     รวมค่ารักษาพยาบาล
                                 </td>
-                                <td class="text-left" colspan="5">
+                                <td class="text-left" colspan="4">
                                     {{ number_format($cost,2) }} ฿
                                 </td>
                             </tr>
