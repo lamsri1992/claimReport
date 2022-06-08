@@ -44,6 +44,12 @@
                     <p style="font-size: 0.85rem;">Report Center</p>
                 </a>
             </li>
+            <li>
+                <a href="{{ url('https://www.newcb.ktb.co.th/#/') }}" target="_blank">
+                    <i class="fa-solid fa-money-check-dollar"></i>
+                    <p style="font-size: 0.85rem;">Report KTB</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
