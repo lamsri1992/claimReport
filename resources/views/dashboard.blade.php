@@ -149,11 +149,11 @@
                             <tr class="font-weight-bold">
                                 <td></td>
                                 <td class="text-center">
-                                    <i class="fa-solid fa-hospital-user"></i>
+                                    <i class="fa-solid fa-bed"></i>
                                     ผู้ป่วยในทั้งหมด : {{ $ipd }} คน
                                 </td>
                                 <td class="text-center">
-                                    <i class="fa-solid fa-bed"></i>
+                                    <i class="fa-solid fa-hospital-user"></i>
                                     ผู้ป่วยนอกทั้งหมด : {{ $opd }} คน
                                 </td>
                                 <td></td>
