@@ -152,14 +152,14 @@ class todo extends Controller
         foreach ($data as $res){
             DB::connection('mysql')->table('claim_list')->insert([
                 "visit_date" => $res['0'],
-                "visit_type" => $res['1'],
-                "visit_pid" => $res['2'],
-                "visit_hn" => $res['3'],
-                "visit_plan" => $res['4'],
-                "visit_patient" => $res['5'],
-                "visit_age" => $res['6'],
-                "visit_icd10" => $res['7'],
-                "visit_cost" => $res['8'],
+                // "visit_type" => $res['1'],
+                "visit_pid" => $res['1'],
+                "visit_hn" => $res['2'],
+                "visit_plan" => $res['3'],
+                "visit_patient" => $res['4'],
+                "visit_age" => $res['5'],
+                "visit_icd10" => $res['6'],
+                "visit_cost" => $res['7'],
             ]);
         }
 
