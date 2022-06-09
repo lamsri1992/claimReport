@@ -134,8 +134,8 @@
                         <tbody>
                             @php $ipd = 0; $opd = 0; @endphp
                             @foreach ($report as $res)
-                            @php $ipd += $res->count_patient_ipd @endphp
-                            @php $opd += $res->count_patient_opd @endphp
+                            @php $ipd = count($res->count_patient_ipd) @endphp
+                            @php $opd = count($res->count_patient_opd) @endphp
                             <tr>
                                 <td>{{ $res->contract_plans_description }}</td>
                                 <td class="text-center">{{ $res->count_visit_ipd }}</td>
